@@ -11,15 +11,35 @@
 |
 */
 use Illuminate\Http\Request;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
-    $links = \App\Link::all();
-    return view('welcome', ['links' => $links]);
+ return View('welcome');
+});
+Route::get('/shop', function()
+{
+   return View ('shop');
+});
+Route::get('/contact', function()
+{
+   return View ('contact');
+});
+Route::post('/contact', Function(Request $request){
+  Mail::to('zsaadoub882@gmail.com')->send(new ContactMail($request));
+  return redirect('/');
+
+});
+Route::get('/demo', function () {
+   return view('demo');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/index', function(){
+  return view('pages/index');
+});
 
 Route::get('/submit', function () {
     return view('submit');
