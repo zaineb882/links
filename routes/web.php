@@ -37,9 +37,10 @@ Route::get('/demo', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/index', function(){
-  return view('pages/index');
-});
+Route::get('pagination', 'LinksController@index');
+Route::resource('products','ProductController');
+
+
 
 Route::get('/submit', function () {
     return view('submit');
